@@ -1,5 +1,5 @@
 
-# Git 使用教程与团队协作规范
+# Git 教程、协作规范
 
 ## 目录
 1. [Git 基础知识](#git-基础知识)
@@ -91,22 +91,63 @@ git checkout <branch-name>
 
 创建新分支并切换到该分支。
 
-### 9. 合并分支
-
-```bash
-git checkout <target-branch>
-git merge <source-branch>
-```
-
-将源分支的更改合并到目标分支中。
-
-### 10. 查看和删除分支
+### 9. 查看和删除分支
 
 ```bash
 git branch -a  # 查看所有分支
 git branch -d <branch-name>  # 删除本地分支
 git push origin --delete <branch-name>  # 删除远程分支
 ```
+
+### 10. 配置远程仓库
+
+远程仓库用于团队协作，将本地代码上传到远程仓库让其他人可以获取最新代码。
+
+#### 添加远程仓库
+```bash
+git remote add aideal <repository-url>
+```
+为本地仓库添加一个名为 `aideal` 的远程仓库，`<repository-url>` 为远程仓库的地址。
+
+#### 查看远程仓库
+```bash
+git remote -v
+```
+查看已添加的远程仓库及其 URL。
+
+#### 修改远程仓库 URL
+```bash
+git remote set-url aideal <new-repository-url>
+```
+更改远程仓库的 URL 地址。
+
+#### 删除远程仓库
+```bash
+git remote remove aideal
+```
+删除名为 `origin` 的远程仓库配置。
+
+---
+
+### 11. 推送和拉取代码
+
+#### 推送代码到远程仓库
+```bash
+git push origin <branch-name>
+```
+将本地分支推送到远程仓库的指定分支。通常用于更新远程仓库的代码。
+
+#### 拉取远程仓库的最新代码
+```bash
+git pull origin <branch-name>
+```
+从远程仓库拉取最新的代码并合并到当前分支。
+
+#### 获取远程仓库的更新（不合并）
+```bash
+git fetch origin
+```
+获取远程仓库的最新更新，但不会合并到当前分支，可以用于检查远程是否有更新。
 
 ---
 
@@ -118,7 +159,6 @@ git push origin --delete <branch-name>  # 删除远程分支
 2. **开发分支**：`dev`，用于集成团队的开发代码。
 3. **功能分支**：`feature/<feature-name>`，用于开发新功能。
 4. **修复分支**：`fix/<issue-name>`，用于修复 Bug。
-5. **发布分支**：`release/<version>`，用于准备发布。
 
 ---
 
@@ -144,7 +184,7 @@ git push origin --delete <branch-name>  # 删除远程分支
     ```bash
     git push origin feature/<feature-name>
     ```
-    - 在代码托管平台（如 GitHub、GitLab）上创建合并请求并等待审查。
+    - 在 GitHub 上创建合并请求并等待审查。
 
 5. **合并后删除分支**
     - 本地和远程分支均应删除，保持分支清洁。
@@ -237,7 +277,3 @@ git push -f
 
 - [Pro Git（中文版）](https://git-scm.com/book/zh/v2) — 官方 Git 指南
 - [Atlassian Git 教程](https://www.atlassian.com/git/tutorials) — 简洁易懂的 Git 教程
-
----
-
-本教程涵盖了 Git 的基本操作与团队协作规范。通过良好的 Git 使用习惯和规范，团队可以更高效地协作，减少合并冲突，并保持代码库的整洁。希望大家在实际操作中不断积累经验，提高工作效率！
